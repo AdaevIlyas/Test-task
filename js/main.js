@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     arr.forEach(i => i.style.display = 'none');
     document.body.style.overflow = 'auto';
     document.body.style.marginRight = `0px`;
+    goodSub.style.display = 'none';
 
     fields.forEach(field => field.value = '')
     clearInputError()
@@ -78,7 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
     errorAll = form.querySelector('.modal-form__all-error'),
     newField = [...fields].filter(item => item.required),
     elementFlag = document.querySelector('.modal-form__flag'),
-    elementFlagField = document.querySelector('.modal-form__flag input');
+    elementFlagField = document.querySelector('.modal-form__flag input'),
+    goodSub = document.querySelector('.good-sub'),
+    goodSubClose = goodSub.querySelector(".good-sub__close"),
+    goodSubBtn = goodSub.querySelector('.good-sub__btn'),
+    goodSubCloseArr = [goodSubClose, goodSubBtn];
 
   form.addEventListener('input', () => {
     if (newField[0].value && newField[1].value && newField[2].value) {
@@ -104,6 +109,20 @@ document.addEventListener('DOMContentLoaded', () => {
       errorAll.style.display = 'block';
       btn.disabled = true;
     }
+  })
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.target.parentElement.parentElement.style.display = 'none';
+    goodSub.style.display = 'block';
+    btn.disabled = true;
+  })
+
+  goodSubCloseArr.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal()
+    })
   })
 
   function reqMessage(element, elementError, boolError) {
