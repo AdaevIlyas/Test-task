@@ -1,6 +1,16 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  // burger
+  const burgerBtn = document.querySelector('#menu-bar'),
+    burgerMenu = document.querySelector('.header-burger');
+
+  burgerBtn.addEventListener('click', () => {
+    burgerBtn.classList.toggle('change');
+    burgerMenu.classList.toggle('burger-active');
+  })
+
   // cookie
   const cookie = document.querySelector('.cookie'),
     cookieBtns = cookie.querySelectorAll('a');
@@ -33,8 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       cookie.style.display = 'none';
       arr.forEach(i => i.style.display = 'block');
+      if (window.innerWidth > 375) {
+        document.body.style.marginRight = `${scroll}px`;
+      }
       document.body.style.overflow = 'hidden';
-      document.body.style.marginRight = `${scroll}px`;
+      burgerBtn.classList.remove('change')
+      burgerMenu.classList.remove('burger-active')
     })
   })
 
